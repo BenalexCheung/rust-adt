@@ -27,7 +27,7 @@ impl Solution {
 mod tests {
     use super::*;
     #[test]
-    fn it_works() {
+    fn test_is_valid() {
         let s = String::from("[[][{}{({[]{}({})})}]]");
         assert_eq!(Solution::is_valid(s), true);
     }

@@ -28,7 +28,7 @@ impl Solution {
 mod tests {
     use super::*;
     #[test]
-    fn it_works() {
+    fn test_plus_one() {
         let digits = vec![4, 9, 9];
         let output = Solution::plus_one(digits);
         assert_eq!(output, vec![5,0,0]);

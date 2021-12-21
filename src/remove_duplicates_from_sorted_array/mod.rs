@@ -24,7 +24,7 @@ impl Solution {
 mod tests {
     use super::*;
     #[test]
-    fn it_works() {
+    fn test_remove_duplicates() {
         let mut nums: Vec<i32> = vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
         let output = Solution::remove_duplicates(&mut nums);
         println!("{}",output);

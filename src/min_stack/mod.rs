@@ -41,7 +41,7 @@ impl MinStack {
 mod tests {
     use super::*;
     #[test]
-    fn it_works() {
+    fn test_min_stack() {
         let mut min_stack = MinStack::new();
         min_stack.push(-2);
         min_stack.push(0);

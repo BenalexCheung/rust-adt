@@ -24,7 +24,7 @@ impl Solution {
 mod tests {
     use super::*;
     #[test]
-    fn it_works() {
+    fn test_move_zeroes() {
         let mut input = vec![0, 1, 0, 3, 12];
         println!("input: {:?}", input);
         Solution::move_zeroes(&mut input);

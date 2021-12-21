@@ -56,7 +56,7 @@ fn max(deque: &VecDeque<i32>) -> i32 {
 mod tests {
     use super::*;
     #[test]
-    fn it_works() {
+    fn test_max_sliding_window() {
         let v = vec![1, 3, -1, -3, 5, 3, 6, 7];
         assert_eq!(
             Solution::max_sliding_window(v.clone(), 3),

@@ -11,8 +11,9 @@
 - 连续的内存空间
 - 相同类型
 
-#### [移动零](./move-zeroes)
-#### [加一](./plus-one)
+#### [移动零](src/move_zeroes)
+#### [加一](src/plus_one)
+#### [删除排序数组中的重复项](src/remove_duplicates_from_sorted_array)
 
 ### 栈与队列
 **栈**是一种操作受限的线性表数据结构，所有的操作都在栈顶完成。
@@ -33,11 +34,24 @@
 
 **应用场景**：实现一个长度动态变化的窗口或者连续区间
 
-#### [最小栈](./min-stack)
-#### [有效的括号](./valid-parentheses)
-#### [滑动窗口最大值](./sliding-window-maximum)
+#### [最小栈](src/min_stack)
+#### [有效的括号](src/valid_parentheses)
+#### [滑动窗口最大值](src/sliding_window_maximum)
 
 ### 哈希表
+
+**哈希表（散列表）**是根据键直接进行访问的数据结构。将键转化为数组索引的映射函数叫做哈希函数（散列函数），将哈希函数计算得到的值叫做哈希值（散列值）。
+
+解决哈希碰撞的方法：
+
+- 链表法
+- 开放定址法
+- 再哈希法
+- 建立公共溢出区
+
+#### [两数之和](src/two_sum)
+#### [有效的字母异位词](src/valid_anagram)
+#### [字母异位词分组](src/group_anagram)
 
 ### 链表
 
