@@ -7,6 +7,11 @@ pub mod valid_parentheses;
 pub mod two_sum;
 pub mod valid_anagram;
 pub mod group_anagram;
+pub mod reverse_linked_list;
+pub mod middle_of_the_linked_list;
+pub mod merge_two_sorted_list;
+pub mod remove_nth_node_from_end_of_list;
+
 
 #[cfg(test)]
 mod tests {
