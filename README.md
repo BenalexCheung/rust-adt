@@ -84,10 +84,10 @@
 
 **堆**：是一棵完全二叉树，且堆中每个节点的值必须大于等于（或小于等于）其子树中每个节点的值。堆适合用数组来存储。
 
-#### [二叉树的前序遍历](src/binary_tree_preorder_traversal)
-#### [二叉树的中序遍历](src/binary_tree_inorder_traversal)
-#### [二叉树的后序遍历](src/binary_tree_postorder_traversal)
-#### [二叉树的层序遍历](src/binary_tree_level_order_traversal)
+#### [二叉树的前序遍历](src/binary_tree_traversal)
+#### [二叉树的中序遍历](src/binary_tree_traversal)
+#### [二叉树的后序遍历](src/binary_tree_traversal)
+#### [二叉树的层序遍历](src/binary_tree_traversal)
 #### [二叉搜索树的插入操作](src/insert_into_a_binary_search_tree)
 
 ## 算法
