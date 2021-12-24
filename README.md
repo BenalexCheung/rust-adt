@@ -92,9 +92,103 @@
 
 ## 算法
 
-常用的一些算法，如递归、分治、回溯、二分查找、深度与广度有限搜索、各种排序和动态规划等
+常用的一些算法，如递归、分治、回溯、二分查找、深度与广度优先搜索、各种排序和动态规划等
 
-### 递归、分支和回溯
+### 递归、分治和回溯
+
+#### 递归
+
+递归算法能解决的问题，要求同时满足一下3个条件：
+- 一个问题的解可以分解为几个子问题的解
+- 这个问题与分解之后的子问题除了数据规模不同外，求解思路完全一样
+- 存在递归终止条件
+
+```Rust
+fn recursion(level: T, param: T) {
+    // 递归终止条件
+    if level > MAX_LEVEL {
+        process_result();
+        return
+    }
+
+    // 处理当前层逻辑
+    process(level, param);
+
+    // 下探到下一层
+    recursion(level + 1, new_param);
+
+    // 清理当前层状态
+    clear_state();
+}
+```
+
+*“常见的处理递归问题的思维误区是试图弄清楚整个递归规程”*
+
+#### 分治
+
+分治算法是一种处理问题的思想，能解决的问题一般需要满足以下几个条件：
+- 原问题与分解后的子问题具有相同的模式
+- 原问题分解后的子问题可以独立求解，子问题之间没有相关性
+- 具有分解终止条件，当问题足够小时，可以直接求解
+- 可以将子问题合并成原问题，且合并操作的复杂度不能太高
+
+```Rust
+fn divide_conquer(problem: T, param1: T, param2: T, ...) {
+    // 递归终止条件
+    if 满足结束条件 {
+        return 求解结果
+    }
+
+    // 处理当前层逻辑，将问题拆分为子问题
+    data = prepare_data(problem);
+    subproblems = split_problem(problem, data);
+
+    // 下探到下一层，求解子问题
+    subresult1 = divide_conquer(subproblems[0], p1, ...);
+    subresult2 = divide_conquer(subproblems[1], p1, ...);
+    subresult3 = divide_conquer(subproblems[2], p1, ...);
+    ...
+
+    // 将子问题的结果合并成原问题的解
+    result = process_result(subresult1, subresult2, subresult3, ...);
+
+    // 清理当前层状态
+    clear_state();
+}
+```
+
+#### 回溯
+
+回溯算法是采用试错的思想，通常采用递归来实现，利用剪枝操作避免穷举所有可能的情况，提高回溯的效率。回溯算法的核心是，维护走过的路径和当前可以做的选择列表，在递归调用之前做选择，在递归调用之后撤销选择。当触发结束条件时，将路径记入结果集。
+
+```Rust
+let mut solution = vec![];
+fn backtrack(路径， 选择列表) {
+    // 递归终止条件
+    if 满足结束条件 {
+        solution.push(路径)；
+        return;
+    }
+
+    for 选择 in 选择列表 {
+        // 做选择
+        路径.push(选择)；
+
+        // 将该选择从选择列表移除后递归调用
+        backtrack(路径， 选择列表);
+
+        // 撤销选择，将该选择重新加入选择列表
+        路径.remove(选择);
+    }
+}
+```
+
+#### [pow(x, n)](src/powx_n)
+#### [爬楼梯](src/climbing_stairs)
+#### [括号生成](src/generate_parentheses)
+#### [子集](src/subsets)
+#### [组合](src/combinations)
+#### [N皇后](src/n_queens)
 
 ### 二分查找法
 

@@ -13,6 +13,12 @@ pub mod merge_two_sorted_list;
 pub mod remove_nth_node_from_end_of_list;
 pub mod binary_tree_traversal;
 pub mod insert_into_a_binary_search_tree;
+pub mod powx_n;
+pub mod climbing_stairs;
+pub mod generate_parentheses;
+pub mod subsets;
+pub mod combinations;
+pub mod n_queens;
 
 #[cfg(test)]
 mod tests {
