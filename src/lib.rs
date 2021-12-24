@@ -19,6 +19,9 @@ pub mod generate_parentheses;
 pub mod subsets;
 pub mod combinations;
 pub mod n_queens;
+pub mod search_in_rotated_sorted_array;
+pub mod find_minimum_in_rotated_sorted_array;
+pub mod valid_perfect_square;
 
 #[cfg(test)]
 mod tests {
