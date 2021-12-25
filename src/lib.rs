@@ -22,6 +22,9 @@ pub mod n_queens;
 pub mod search_in_rotated_sorted_array;
 pub mod find_minimum_in_rotated_sorted_array;
 pub mod valid_perfect_square;
+pub mod maximum_depth_of_binary_tree;
+pub mod mimimum_depth_of_binary_tree;
+pub mod search_in_a_binary_search_tree;
 
 #[cfg(test)]
 mod tests {

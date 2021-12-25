@@ -221,6 +221,91 @@ while left <= right {
 
 ### 深度/广度优先搜索
 
+**深度优先搜索**（Depth-First-Search, DFS）解决的是连通性的问题，判断是否有一条路径能从起点连接到终点。这里的起点和终点也可以是某种起始状态和最终状态。
+
+#### 递归实现
+
+```Rust
+let mut visted = Vec::new();
+fn dfs(node, visted) {
+    // 终止条件：已经访问过当前节点
+    if visited.contains(node) {return;}
+
+    // 将当前节点加入visited
+    visited.push(node);
+
+    // 处理当前节点
+    process(node);
+
+    // 获得当前节点的子节点并递归执行
+    let child_nodes = generate_child_nodes(node);
+    for child_node in child_nodes {
+        if !visited.contains(child_node) {
+            dfs(child_node, visited);
+        }
+    }
+}
+```
+
+#### 非递归实现
+
+```Rust
+fn dfs(root) {
+    // 终止条件：已经访问过当前节点
+    if root.is_none() {return;}
+
+    let mut visited = Vec::new();
+    let mut stack = Vec::new();
+    stack.push(root);
+
+    while !stack.is_empty() {
+        let node = stack.pop();
+
+        // 将当前节点加入visited
+        visited.push(node);
+        
+        // 处理当前节点
+        process(node);
+    }
+
+    // 获得当前节点的关联节点并加入stack
+    let related_nodes = generate_related_nodes(node);
+    for related_node in related_nodes {
+        stack.push(related_node);
+    }
+}
+```
+
+**广度优先搜索**（Breadth-First-Search, BFS）是一种地毯式层层推进的搜索策略。
+
+```Rust
+fn bfs(graph, start, end) {
+    let mut visited = Vec::new();
+    let mut deque = VecDeque::new();
+    deque.push_back(start);
+
+    while !deque.is_empty() {
+        let node = stack.pop_front();
+
+        // 将当前节点加入visited
+        visited.push(node);
+        
+        // 处理当前节点
+        process(node);
+    }
+
+    // 获得当前节点的关联节点并加入stack
+    let related_nodes = generate_related_nodes(node);
+    for related_node in related_nodes {
+        deque.push_back(related_node);
+    }
+}
+```
+
+#### [二叉树的最大深度](src/maximum_depth_of_binary_tree)
+#### [二叉树的最小深度](src/mimimum_depth_of_binary_tree)
+#### [二叉搜索树中的搜索](src/search_in_a_binary_search_tree)
+
 ### 排序算法
 
 ### 动态规划
