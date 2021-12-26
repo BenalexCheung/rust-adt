@@ -25,6 +25,9 @@ pub mod valid_perfect_square;
 pub mod maximum_depth_of_binary_tree;
 pub mod mimimum_depth_of_binary_tree;
 pub mod search_in_a_binary_search_tree;
+pub mod kth_largest_element_in_an_array;
+pub mod merge_intervals;
+pub mod reverse_pairs;
 
 #[cfg(test)]
 mod tests {

@@ -308,5 +308,275 @@ fn bfs(graph, start, end) {
 
 ### 排序算法
 
+常见的排序算法可以分为两大类：
+
+1）比较类排序：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破O(n logn)，因此也称为非线性时间比较类排序
+- 交换排序：冒泡排序、\*快速排序
+- 插入排序：简单插入排序、\*希尔排序
+- 选择排序：\*简单选择排序、\*堆排序
+- 归并排序：二路归并排序、多路归并排序
+
+2）非比较类排序：不通过比较来决定元素间的相对次序，可以突破基于比较排序的时间下界，以线性时间运行
+- 计数排序
+- 桶排序
+- 基数排序
+
+**冒泡排序**
+```Rust
+pub fn bubble_sort(mut nums: Vec<i32>) -> Vec<i32> {
+    if nums.is_empty() {
+        return vec![];
+    }
+
+    for i in 0..nums.len() {
+        // 标记每轮遍历中是否发生元素交换
+        let mut flag = false;
+
+        // 比较相邻元素，同时标记有交换发生
+        for j in 0..nums.len() - i - 1 {
+            if nums[j] > nums[j + 1] {
+                let tmp = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = tmp;
+                flag = true;
+            }
+        }
+
+        println!("{:?}", nums);
+
+        // 判断是否有数据交换，若没有则提前推出
+        if !flag {
+            break;
+        }
+    }
+    nums
+}
+```
+
+**插入排序**
+```Rust
+fn insertion_sort(mut nums: Vec<i32>) -> Vec<i32> {
+    if nums.is_empty() {
+        return vec![];
+    }
+
+    for i in 1..nums.len() {
+        // 开始外循环，用current保存当前i指向的未排序元素
+        let current = nums[i];
+        // 开始内循环，用当前j指向的已排序元素和current比较
+        let mut j = (i - 1) as i32;
+        while j >= 0 {
+            // 若已排序元素大于未排序元素，则将已排序元素右移一位
+            if nums[j as usize] > current {
+                // 移动元素
+                nums[(j + 1) as usize] = nums[j as usize];
+            } else {
+                // 结束内循环，j+1指向的位置就是current应该插入的位置
+                break;
+            }
+            j -= 1;
+        }
+
+        nums[(j + 1) as usize] = current;
+        println!("{:?}", nums);
+    }
+    nums
+}
+```
+
+**选择排序**
+```Rust
+fn selection_sort(mut nums: Vec<i32>) -> Vec<i32> {
+    if nums.is_empty() {
+        return vec![];
+    }
+
+    for i in 0..nums.len() - 1 {
+        let mut min_index = i;
+
+        for j in i + 1..nums.len() {
+            if nums[j] < nums[min_index] {
+                min_index = j;
+            }
+        }
+
+        if i != min_index {
+            nums.swap(i, min_index);
+        }
+        println!("{:?}", nums);
+    }
+    nums
+}
+```
+
+**堆排序**
+```Rust
+fn heap_sort(mut nums: Vec<i32>) -> Vec<i32> {
+    if nums.is_empty() {
+        return vec![];
+    }
+    build_heap(&mut nums);
+    for i in (0..nums.len()).rev() {
+        nums.swap(0, i);
+        heapify(&mut nums, 0, i);
+        println!("{:?}", nums);
+    }
+    nums
+}
+
+// 建立大顶堆
+fn build_heap(nums: &mut Vec<i32>) {
+    let len = nums.len();
+    for i in (0..len / 2).rev() {
+        heapify(nums, i, len);
+    }
+}
+
+fn heapify(nums: &mut Vec<i32>, idx: usize, len: usize) {
+    let mut idx = idx;
+    loop {
+        let mut max_pos = idx;
+        if 2 * idx + 1 < len && nums[idx] < nums[2 * idx + 1] {
+            max_pos = 2 * idx + 1;
+        }
+        if 2 * idx + 2 < len && nums[max_pos] < nums[2 * idx + 2] {
+            max_pos = 2 * idx + 2;
+        }
+        if max_pos == idx {
+            break;
+        }
+        nums.swap(idx, max_pos);
+        idx = max_pos;
+    }
+}
+```
+
+**归并排序**
+```Rust
+fn merge_sort(mut nums: Vec<i32>) -> Vec<i32> {
+    if nums.is_empty() {
+        return nums;
+    }
+
+    let n = nums.len() - 1;
+    merge_sort_recursion(&mut nums, 0, n);
+    nums
+}
+
+fn merge_sort_recursion(nums: &mut Vec<i32>, left: usize, right: usize) {
+    // 判断是否只剩下最后一个元素
+    if left >= right {
+        return;
+    }
+
+    // 从中间将数组分成两个序列
+    let middle = left + (right - left) / 2;
+
+    // 分别以递归方式将左右两个序列排好序
+    merge_sort_recursion(nums, left, middle);
+    merge_sort_recursion(nums, middle + 1, right);
+
+    // 将已有序的两个序列合并
+    merge(nums, left, middle, right);
+}
+
+fn merge(nums: &mut Vec<i32>, left: usize, middle: usize, right: usize) {
+    // 定义索引i表示左序列的起始位置
+    let mut i = left;
+
+    // 定义索引j表示右序列的起始位置
+    let mut j = middle + 1;
+
+    // 定义索引k表示开始排序原数组的位置
+    let mut k = left;
+
+    // 定义用于排序过程中临时存放元素的数组
+    let mut tmp = vec![];
+
+    while k <= right {
+        if i > middle {
+            // 左序列元素处理完毕，剩下右序列元素，将右序列元素逐个添加
+            tmp.push(nums[j]);
+            j += 1;
+            k += 1;
+        } else if j > right {
+            // 右序列元素处理完毕，剩下左序列元素，将左序列元素逐个添加
+            tmp.push(nums[i]);
+            i += 1;
+            k += 1;
+        } else if nums[i] < nums[j] {
+            // 左序列元素小于右序列元素，将左序列元素添加，索引i往前移动一位
+            tmp.push(nums[i]);
+            i += 1;
+            k += 1;
+        } else {
+            // 左序列元素大于等于有序列元素，将右序列元素添加，索引j往前移动一位
+            tmp.push(nums[j]);
+            j += 1;
+            k += 1;
+        }
+    }
+
+    for i in 0..=(right - left) {
+        nums[left + i] = tmp[i];
+    }
+
+    println!("{:?}", nums);
+}
+```
+
+**快速排序**
+```Rust
+fn quick_sort(mut nums: Vec<i32>) -> Vec<i32> {
+    if nums.is_empty() {
+        return nums;
+    }
+    let len = nums.len();
+    quick_sort_recursion(&mut nums, 0, len - 1);
+    nums
+}
+
+fn quick_sort_recursion(nums: &mut Vec<i32>, left: usize, right: usize) {
+    // 判断是否只剩下一个元素
+    if left >= right {
+        return;
+    }
+
+    // 使用partition函数找到分区点
+    let pivot = partition(nums, left, right);
+
+    // 对分区点左子数组和右子数组进行递归操作
+    if pivot != 0 {
+        quick_sort_recursion(nums, left, pivot - 1);
+    }
+    quick_sort_recursion(nums, pivot + 1, right);
+}
+
+fn partition(nums: &mut Vec<i32>, left: usize, right: usize) -> usize {
+    // 设定基准值
+    let pivot = right;
+
+    // 遍历数组，每个数都与基准值进行比较，小于基准值的放到索引i指向的位置
+    // 遍历完成后，索引i位置之前的所有书都小于基准值
+    let mut i = left;
+    for j in left..right {
+        if nums[j] < nums[pivot] {
+            nums.swap(i, j);
+            i += 1;
+        }
+    }
+
+    // 将末尾的基准值交换到索引i的位置，此索引位置之后的所有数都大于基准值
+    nums.swap(i, right);
+    println!("{:?}", nums);
+    // 返回i作为分区点
+    i
+}
+```
+
+#### [数组中的第k个最大元素](src/kth_largest_element_in_an_array)
+#### [合并区间](src/merge_intervals)
+#### [翻转对](src/reverse_pairs)
+
 ### 动态规划
 

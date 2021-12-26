@@ -33,6 +33,7 @@ impl TreeNode {
         root
     }
 }
+
 /// 假设要构造的二叉树的层序遍历序列存在一个数组里
 /// 注意：需要补充空节点
 fn build_tree_recursion(v: &Vec<i32>, i: usize, n: usize) -> Option<Rc<RefCell<TreeNode>>> {
@@ -47,11 +48,11 @@ fn build_tree_recursion(v: &Vec<i32>, i: usize, n: usize) -> Option<Rc<RefCell<T
 }
 
 /// 假设要构造的二叉树的层序遍历序列存在一个数组里
-/// 1) 只要数组不为空，就先入队数组首元素，并用这个值创建二叉树的root。
-/// 2) 然后进入循环，队列不为空，就拿队头元素，队头再出队。队列为空，结束循环。
-/// 3) 只要数组还有元素，就先给刚刚拿出的队头元素创建左孩子，然后左孩子入队。
-/// 4) 同上，再创建右孩子，右孩子入队。
-/// 5) 结束一次循环。回到2)
+/// 1. 只要数组不为空，就先入队数组首元素，并用这个值创建二叉树的root。
+/// 2. 然后进入循环，队列不为空，就拿队头元素，队头再出队。队列为空，结束循环。
+/// 3. 只要数组还有元素，就先给刚刚拿出的队头元素创建左孩子，然后左孩子入队。
+/// 4. 同上，再创建右孩子，右孩子入队。
+/// 5. 结束一次循环。回到步骤2
 fn build_tree_iteration(v: &mut Vec<i32>, i: usize, n: usize) -> Option<Rc<RefCell<TreeNode>>> {
     if v.is_empty() {
         return None;
@@ -146,11 +147,12 @@ fn preorder_traversal1(root: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<i32
     }
 }
 
-/// 1) 创建一个栈用来存放节点
-/// 2) 若当前节点非空，访问当前节点值，再将当前节点入栈，并进入其左子树访问
-/// 3) 重复步骤2)，直到当前节点为空
-/// 4) 将栈顶的节点出栈，并进入其右子树访问
-/// 5) 重复步骤2~4，直到当前节点为空且栈为空，完成所有节点的访问
+/// 前序遍历
+/// 1. 创建一个栈用来存放节点
+/// 2. 若当前节点非空，访问当前节点值，再将当前节点入栈，并进入其左子树访问
+/// 3. 重复步骤2，直到当前节点为空
+/// 4. 将栈顶的节点出栈，并进入其右子树访问
+/// 5. 重复步骤2~4，直到当前节点为空且栈为空，完成所有节点的访问
 fn preorder_traversal2(root: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<i32>) {
     if root.is_none() {
         return;
@@ -189,11 +191,12 @@ fn inorder_traversal1(root: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<i32>
     }
 }
 
-/// 1) 创建一个栈用来存放节点
-/// 2) 若当前节点非空，再将当前节点入栈，并进入其左子树访问
-/// 3) 重复步骤2)，直到当前节点为空
-/// 4) 将栈顶的节点出栈，访问当前节点值，并进入其右子树访问
-/// 5) 重复步骤2~4，直到当前节点为空且栈为空，完成所有节点的访问
+/// 中序遍历
+/// 1. 创建一个栈用来存放节点
+/// 2. 若当前节点非空，再将当前节点入栈，并进入其左子树访问
+/// 3. 重复步骤2，直到当前节点为空
+/// 4. 将栈顶的节点出栈，访问当前节点值，并进入其右子树访问
+/// 5. 重复步骤2~4，直到当前节点为空且栈为空，完成所有节点的访问
 fn inorder_traversal2(root: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<i32>) {
     if root.is_none() {
         return;
@@ -232,11 +235,12 @@ fn postorder_traversal1(root: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<i3
     }
 }
 
-/// 1) 创建stack1、stack2两个栈来存放节点，并先将根节点入stack1
-/// 2) 让stack1栈顶的节点出栈，将该节点入stack2，同时将该节点的左右子节点入栈stack1
-/// 3) 重复步骤2)，直到stack1为空
-/// 4) 将stack2栈顶的节点出栈，访问该节点
-/// 5) 重复步骤4，直到stack2为空，完成所有节点的访问
+/// 后续遍历
+/// 1. 创建stack1、stack2两个栈来存放节点，并先将根节点入stack1
+/// 2. 让stack1栈顶的节点出栈，将该节点入stack2，同时将该节点的左右子节点入栈stack1
+/// 3. 重复步骤2，直到stack1为空
+/// 4. 将stack2栈顶的节点出栈，访问该节点
+/// 5. 重复步骤4，直到stack2为空，完成所有节点的访问
 fn postorder_traversal2(root: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<i32>) {
     if root.is_none() {
         return;
@@ -270,12 +274,13 @@ fn level_order_traversal1(root: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<
     }
 }
 
-/// 1) 树不为空，root先入队
-/// 2) 进入循环，队列不为空，则拿到队头元素，队头出队。队列为空，结束循环。
-/// 3) 打印刚刚队头元素的数据。
-/// 4) 它如果存在左孩子，左孩子入队。
-/// 5) 它如果存在右孩子，右孩子入队。
-/// 6) 结束一次循环，回到2)
+/// 层序遍历
+/// 1. 树不为空，root先入队
+/// 2. 进入循环，队列不为空，则拿到队头元素，队头出队。队列为空，结束循环。
+/// 3. 打印刚刚队头元素的数据。
+/// 4. 它如果存在左孩子，左孩子入队。
+/// 5. 它如果存在右孩子，右孩子入队。
+/// 6. 结束一次循环，回到步骤2
 fn level_order_traversal2(root: Option<Rc<RefCell<TreeNode>>>, result: &mut Vec<i32>) {
     if root.is_none() {
         return;
