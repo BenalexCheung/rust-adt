@@ -28,6 +28,11 @@ pub mod search_in_a_binary_search_tree;
 pub mod kth_largest_element_in_an_array;
 pub mod merge_intervals;
 pub mod reverse_pairs;
+pub mod minimum_path_sum;
+pub mod triangle;
+pub mod coin_change;
+pub mod longest_increasing_subsequence;
+pub mod edit_distance;
 
 #[cfg(test)]
 mod tests {
