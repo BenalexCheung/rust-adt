@@ -1,6 +1,8 @@
 # rust-adt
 > 数据结构和算法实践 —— 《Rust编程：入门、实战与进阶》 朱春雷，机械工业出版社
 
+[Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
+
 ## 数据结构
 常用的数据结构包括：数组、栈、队列、哈希表、链表、树
 
